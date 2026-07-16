@@ -1,0 +1,17 @@
+# Archivos objeto
+*.o
+*.obj
+
+# Ejecutables
+*.exe
+*.out
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Configuración de VS Code
+.vscode/
+
+# Archivos temporales
+*.tmp
