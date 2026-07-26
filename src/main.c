@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,27 +14,33 @@ int main(void)
         switch (opcion)
         {
             case 1:
-                printf("\n[Iniciar sesion - En desarrollo]\n");
+                menuIniciarSesion();
                 break;
 
             case 2:
-                printf("\n[Registrar usuario - En desarrollo]\n");
+                menuRegistrarUsuario();
                 break;
 
             case 3:
                 printf("\n[Ranking - En desarrollo]\n");
+                printf("\nPresione ENTER para continuar...");
+                getchar();
+                getchar();
                 break;
 
             case 4:
                 printf("\n[Historial - En desarrollo]\n");
+                printf("\nPresione ENTER para continuar...");
+                getchar();
+                getchar();
                 break;
 
             case 5:
-                printf("\n[Configuracion - En desarrollo]\n");
+                mostrarConfiguracion();
                 break;
 
             case 6:
-                printf("\n[Creditos - En desarrollo]\n");
+                mostrarCreditos();
                 break;
 
             case 0:
@@ -44,6 +49,9 @@ int main(void)
 
             default:
                 printf("\nOpcion invalida.\n");
+                printf("\nPresione ENTER para continuar...");
+                getchar();
+                getchar();
                 break;
         }
 

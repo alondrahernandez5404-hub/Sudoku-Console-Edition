@@ -2,12 +2,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../include/usuario.h"
+#include "../include/archivo.h"
+
+#include <string.h>
+
+static Usuario usuarioActual;
+static int sesionIniciada = 0;
 
 int mostrarMenuPrincipal(void)
 {
     int opcion;
 
-    system("cls");
+    limpiarConsola();
 
     printf("============================================================\n");
     printf("                SUDOKU CONSOLE EDITION\n");
@@ -33,7 +40,7 @@ int mostrarMenuPrincipal(void)
 
 void mostrarCreditos(void)
 {
-    system("cls");
+    limpiarConsola();
 
     printf("============================================================\n");
     printf("                       CREDITOS\n");
@@ -62,7 +69,7 @@ void mostrarCreditos(void)
 
 void mostrarConfiguracion(void)
 {
-    system("cls");
+    limpiarConsola();
 
     printf("============================================================\n");
     printf("                   CONFIGURACION\n");
@@ -82,4 +89,86 @@ void mostrarConfiguracion(void)
 
     getchar();
     getchar();
+}
+
+void menuRegistrarUsuario(void)
+{
+    Usuario usuario;
+
+    inicializarUsuario(&usuario);
+
+    registrarUsuario(&usuario);
+
+    actualizarFecha(&usuario);
+
+    if (!existeArchivoUsuarios())
+    {
+        crearArchivoUsuarios();
+    }
+
+    if (guardarUsuario(&usuario))
+    {
+        printf("\nUsuario registrado correctamente.\n");
+    }
+    else
+    {
+        printf("\nError al guardar el usuario.\n");
+    }
+
+    pausarPrograma();
+}
+
+void menuIniciarSesion(void)
+{
+    char nombre[LONGITUD_NOMBRE];
+
+    Usuario usuario;
+
+    limpiarConsola();
+
+    printf("=========================================\n");
+    printf("          INICIAR SESION\n");
+    printf("=========================================\n\n");
+
+    printf("Nombre: ");
+
+    fgets(nombre, LONGITUD_NOMBRE, stdin);
+
+    nombre[strcspn(nombre, "\n")] = '\0';
+
+    if (buscarUsuario(nombre, &usuario))
+    {
+        usuarioActual = usuario;
+
+        sesionIniciada = 1;
+
+        printf("\nBienvenido %s\n", usuarioActual.nombre);
+
+        printf("\n");
+
+        mostrarPerfilUsuario(&usuarioActual);
+    }
+    else
+    {
+        printf("\nEse usuario no existe.\n");
+    }
+
+    pausarPrograma();
+}
+
+Usuario *obtenerUsuarioActual(void)
+{
+    return &usuarioActual;
+}
+
+void establecerUsuarioActual(Usuario *usuario)
+{
+    usuarioActual = *usuario;
+
+    sesionIniciada = 1;
+}
+
+int haySesionIniciada(void)
+{
+    return sesionIniciada;
 }

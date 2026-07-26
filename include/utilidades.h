@@ -17,4 +17,8 @@ void limpiarBuffer(void);
 
 void obtenerFechaHora(char *buffer, size_t tamBuffer);
 
+void limpiarPantalla(void);
+
+void pausarPantalla(void);
+
 #endif
